@@ -2,7 +2,7 @@
 
 import datetime
 from sqlalchemy import (
-    Column, Integer, String, Text, DateTime, ForeignKey, JSON
+    Column, Integer, String, Text, DateTime, ForeignKey, JSON, Boolean
 )
 from sqlalchemy.orm import relationship
 
@@ -38,6 +38,7 @@ class Portfolio(Base):
     achievements = Column(JSON, nullable=True)
     contact = Column(JSON, nullable=True)
     slug = Column(String(60), unique=True, nullable=False, index=True)
+    is_published = Column(Boolean, default=False, nullable=False)
     resume_text = Column(Text, nullable=True)
     profile_image_url = Column(String(512), nullable=True)
     created_at = Column(DateTime, default=datetime.datetime.utcnow)

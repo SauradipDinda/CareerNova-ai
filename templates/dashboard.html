@@ -159,13 +159,27 @@
                     </div>
 
                     {% if portfolio %}
-                    <div class="portfolio-live">
-                        <h2>
-                            <span class="pulse-circle"></span>
-                            Live & Accessible
-                        </h2>
-                        <a href="/p/{{ portfolio.slug }}" class="portfolio-url" target="_blank">portfoli-ai.app/p/{{
-                            portfolio.slug }}</a>
+                    <div class="portfolio-live"
+                        style="display: flex; justify-content: space-between; align-items: center;">
+                        <div>
+                            <h2>
+                                <span class="pulse-circle"></span>
+                                Live & Accessible
+                            </h2>
+                            <a href="/p/{{ portfolio.slug }}" class="portfolio-url" target="_blank">portfoli-ai.app/p/{{
+                                portfolio.slug }}</a>
+                        </div>
+                        <div class="publish-toggle-container">
+                            <label class="switch">
+                                <input type="checkbox" id="publish-toggle" {% if portfolio.is_published %}checked{%
+                                    endif %} onchange="togglePublishStatus(this)">
+                                <span class="slider round"></span>
+                            </label>
+                            <span id="publish-status-text"
+                                style="font-size: 0.85rem; font-weight: 500; margin-top: 4px; display: block; text-align: center; color: var(--text-muted);">
+                                {% if portfolio.is_published %}Public{% else %}Private{% endif %}
+                            </span>
+                        </div>
                     </div>
 
                     <div style="display: flex; gap: 12px; margin-top: 24px;">

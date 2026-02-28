@@ -164,16 +164,24 @@ async def dashboard_page(
 async def portfolio_page(
     request: Request,
     slug: str,
+    user: Optional[User] = Depends(get_optional_user),
     db: Session = Depends(get_db),
 ):
     portfolio = db.query(Portfolio).filter(Portfolio.slug == slug).first()
     if not portfolio:
         raise HTTPException(status_code=404, detail="Portfolio not found")
+        
+    # Check if the user is authorized to view it
+    is_owner = (user is not None) and (user.id == portfolio.user_id)
+    if not portfolio.is_published and not is_owner:
+        raise HTTPException(status_code=403, detail="This portfolio is not public.")
+
     owner = db.query(User).filter(User.id == portfolio.user_id).first()
     return templates.TemplateResponse("portfolio.html", {
         "request": request,
         "portfolio": portfolio,
         "owner": owner,
+        "is_owner": is_owner,
     })
 
 @app.get("/test_chat", response_class=HTMLResponse)
@@ -351,6 +359,31 @@ async def delete_portfolio(
     db.delete(portfolio)
     db.commit()
     return {"message": "Portfolio deleted"}
+
+
+class PublishToggleRequest(BaseModel):
+    is_published: bool
+
+
+@app.put("/api/portfolio/publish")
+async def toggle_portfolio_publish(
+    payload: PublishToggleRequest,
+    user: User = Depends(get_current_user),
+    db: Session = Depends(get_db),
+):
+    portfolio = db.query(Portfolio).filter(Portfolio.user_id == user.id).first()
+    if not portfolio:
+        raise HTTPException(status_code=404, detail="No portfolio found")
+    
+    portfolio.is_published = payload.is_published
+    db.commit()
+    
+    return {
+        "message": "Portfolio visibility updated",
+        "is_published": portfolio.is_published,
+        "url": f"/p/{portfolio.slug}" if portfolio.is_published else None
+    }
+
 
 
 @app.put("/api/settings/apikey")
