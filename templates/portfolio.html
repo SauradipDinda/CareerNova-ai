@@ -79,7 +79,9 @@
                 <h2 class="port-section-title" data-animate>Skills</h2>
                 <div class="skills-grid" data-animate>
                     {% for skill in portfolio.skills %}
+                    {% if skill and skill.strip() %}
                     <span class="skill-tag glass">{{ skill }}</span>
+                    {% endif %}
                     {% endfor %}
                 </div>
             </section>
@@ -97,7 +99,9 @@
                         {% if proj.technologies %}
                         <div class="tech-tags">
                             {% for tech in proj.technologies %}
+                            {% if tech and tech.strip() %}
                             <span class="tech-tag">{{ tech }}</span>
+                            {% endif %}
                             {% endfor %}
                         </div>
                         {% endif %}
@@ -113,6 +117,7 @@
                 <h2 class="port-section-title" data-animate>Experience</h2>
                 <div class="timeline">
                     {% for exp in portfolio.experience %}
+                    {% if exp.role and exp.role.strip() or exp.company and exp.company.strip() %}
                     <div class="timeline-item glass" data-animate>
                         <div class="timeline-dot"></div>
                         <div class="timeline-content">
@@ -122,6 +127,7 @@
                             <p>{{ exp.description or '' }}</p>
                         </div>
                     </div>
+                    {% endif %}
                     {% endfor %}
                 </div>
             </section>
@@ -133,11 +139,13 @@
                 <h2 class="port-section-title" data-animate>Education</h2>
                 <div class="edu-grid">
                     {% for edu in portfolio.education %}
+                    {% if edu.degree and edu.degree.strip() or edu.institution and edu.institution.strip() %}
                     <div class="edu-card glass" data-animate>
                         <h3>{{ edu.degree or '' }}</h3>
                         <p class="edu-institution">{{ edu.institution or '' }}</p>
                         <p class="edu-year">{{ edu.year or '' }}</p>
                     </div>
+                    {% endif %}
                     {% endfor %}
                 </div>
             </section>
@@ -150,7 +158,9 @@
                 <div class="glass port-card" data-animate>
                     <ul class="achievements-list">
                         {% for ach in portfolio.achievements %}
+                        {% if ach and ach.strip() %}
                         <li>{{ ach }}</li>
+                        {% endif %}
                         {% endfor %}
                     </ul>
                 </div>
