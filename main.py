@@ -160,6 +160,8 @@ async def dashboard_page(
     })
 
 
+from sqlalchemy import func
+
 @app.get("/p/{slug}", response_class=HTMLResponse)
 async def portfolio_page(
     request: Request,
@@ -167,7 +169,8 @@ async def portfolio_page(
     user: Optional[User] = Depends(get_optional_user),
     db: Session = Depends(get_db),
 ):
-    portfolio = db.query(Portfolio).filter(Portfolio.slug == slug).first()
+    # Make slug lookup case-insensitive
+    portfolio = db.query(Portfolio).filter(func.lower(Portfolio.slug) == slug.lower()).first()
     if not portfolio:
         raise HTTPException(status_code=404, detail="Portfolio not found")
         

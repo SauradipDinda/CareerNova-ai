@@ -28,16 +28,22 @@ FALLBACK_MODELS: List[str] = [
 # ---------- PDF text extraction ----------
 
 def extract_text_from_pdf(pdf_path: str) -> str:
-    """Read all pages of a PDF and return concatenated text."""
-    reader = PdfReader(pdf_path)
-    pages = []
-    for page in reader.pages:
-        text = page.extract_text()
-        if text:
-            pages.append(text)
-    full_text = "\n".join(pages)
-    logger.info("Extracted %d characters from %s", len(full_text), pdf_path)
-    return full_text
+    """Read all pages of a PDF and return concatenated text using PyMuPDF for better layout preservation."""
+    import fitz
+    text_blocks = []
+    try:
+        doc = fitz.open(pdf_path)
+        for page in doc:
+            # Using basic text extraction, often better than PyPDF2
+            text = page.get_text()
+            if text:
+                text_blocks.append(text)
+        full_text = "\n".join(text_blocks)
+        logger.info("Extracted %d characters from %s using fitz", len(full_text), pdf_path)
+        return full_text
+    except Exception as e:
+        logger.error("Error extracting text via fitz: %s", str(e))
+        return ""
 
 
 # ---------- LLM call via OpenRouter ----------
