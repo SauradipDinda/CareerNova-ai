@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<body>
+    <button onclick="testChat()">Test Chat API</button>
+    <div id="output"></div>
+    <script>
+        async function testChat() {
+            try {
+                const resp = await fetch('/api/chat/testuser99', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ message: 'hello', history: [] })
+                });
+                const data = await resp.json();
+                document.getElementById('output').innerText = JSON.stringify(data);
+            } catch (e) {
+                document.getElementById('output').innerText = 'Error: ' + e;
+            }
+        }
+    </script>
+</body>
+</html>

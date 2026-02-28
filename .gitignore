@@ -1,0 +1,12 @@
+__pycache__/
+*.pyc
+*.pyo
+.env
+portfoliai.db
+uploads/
+chroma_store/
+*.egg-info/
+dist/
+build/
+.venv/
+venv/

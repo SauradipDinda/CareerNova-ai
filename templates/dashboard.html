@@ -1,0 +1,247 @@
+{% extends "base.html" %}
+{% block title %}Dashboard - CareerNova-AI{% endblock %}
+{% block loader_video %}/static/animations/enter_dashboard.mp4{% endblock %}
+{% block loader_text %}Entering Dashboard...{% endblock %}
+{% block loader_time %}1200{% endblock %}
+
+{% block content %}
+<section class="dashboard">
+    <div class="container">
+
+        <!-- SaaS Hero Section -->
+        <div class="dash-hero-section">
+            <div class="hero-welcome">
+                <h1>Welcome back, {{ user.username }} 👋</h1>
+                <p>Your AI portfolio performance overview.</p>
+            </div>
+
+            <!-- Quick Stats Mini Cards -->
+            <div class="stats-row">
+                <div class="stat-card stagger-in" style="--stagger-idx: 1;">
+                    <div class="stat-card-inner">
+                        <div class="stat-card-front">
+                            <div class="stat-icon">👁️</div>
+                            <div class="stat-info">
+                                <h4>Profile Views</h4>
+                                <div class="stat-val">53</div>
+                            </div>
+                        </div>
+                        <div class="stat-card-back">
+                            <h4>Growth</h4>
+                            <div class="stat-trend success">↑ 12.5%</div>
+                            <p class="stat-desc">More visitors checking your profile.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="stat-card stagger-in" style="--stagger-idx: 2;">
+                    <div class="stat-card-inner">
+                        <div class="stat-card-front">
+                            <div class="stat-icon">🤖</div>
+                            <div class="stat-info">
+                                <h4>AI Interactions</h4>
+                                <div class="stat-val">42</div>
+                            </div>
+                        </div>
+                        <div class="stat-card-back">
+                            <h4>Engagement</h4>
+                            <div class="stat-trend success">↑ 5.2%</div>
+                            <p class="stat-desc">Visitors are talking to your AI.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="stat-card stagger-in" style="--stagger-idx: 3;">
+                    <div class="stat-card-inner">
+                        <div class="stat-card-front">
+                            <div class="stat-icon">👥</div>
+                            <div class="stat-info">
+                                <h4>Unique Visitors</h4>
+                                <div class="stat-val">15</div>
+                            </div>
+                        </div>
+                        <div class="stat-card-back">
+                            <h4>Reach</h4>
+                            <div class="stat-trend success">↑ 8.4%</div>
+                            <p class="stat-desc">New people discovering your work.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="alert-box" class="alert hidden" style="margin-bottom: 24px;"></div>
+
+        <!-- SaaS 60/40 Grid Layout -->
+        <div class="dash-saas-grid">
+
+            <!-- LEFT COLUMN (60%) -->
+            <div class="dash-column left-column">
+
+                <!-- Profile Details Card -->
+                <div class="saas-glass-card stagger-in" style="--stagger-idx: 4;">
+                    <div class="saas-card-header">
+                        <h3>Profile Details</h3>
+                        <p class="saas-card-desc">Manage your account information and security.</p>
+                    </div>
+
+                    <div class="profile-split">
+                        <div>
+                            <div class="info-row">
+                                <span class="info-label">Username</span>
+                                <span class="info-data">{{ user.username }}</span>
+                            </div>
+                            <div class="info-row">
+                                <span class="info-label">Email Address</span>
+                                <span class="info-data">{{ user.email }}</span>
+                            </div>
+                        </div>
+
+                        <div>
+                            <span class="info-label" style="margin-bottom: 8px;">Change Password</span>
+                            <form id="password-form" onsubmit="changePassword(event)">
+                                <div style="margin-bottom: 12px;">
+                                    <input type="password" id="current-password" class="saas-input"
+                                        placeholder="Current Password" required>
+                                </div>
+                                <div style="margin-bottom: 16px;">
+                                    <input type="password" id="new-password" class="saas-input"
+                                        placeholder="New Password" minlength="6" required>
+                                </div>
+                                <button type="submit" class="btn-saas btn-saas-outline btn-saas-full"
+                                    id="password-btn">Update Password</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Upload Resume Card -->
+                <div class="saas-glass-card stagger-in" style="--stagger-idx: 5;">
+                    <div class="saas-card-header">
+                        <h3>Build Your Portfolio</h3>
+                        <p class="saas-card-desc">Upload a PDF resume to generate or regenerate your AI-powered
+                            portfolio.</p>
+                    </div>
+
+                    <form id="upload-form" onsubmit="uploadResume(event)">
+                        <div class="upload-zone" onclick="document.getElementById('resume-file').click()">
+                            <div class="upload-icon">📄</div>
+                            <div class="upload-text">Drag & Drop or Click to Browse</div>
+                            <div class="upload-subtext">PDF only (Max 5MB)</div>
+                            <input type="file" id="resume-file" accept=".pdf" required
+                                onchange="updateUploadText(this)">
+                        </div>
+
+                        <div id="file-name-display"
+                            style="text-align: center; margin-bottom: 16px; font-weight: 500; display: none;"></div>
+
+                        <button type="submit" class="btn-saas btn-saas-primary btn-saas-full" id="upload-btn">
+                            {% if portfolio %}✨ Regenerate Portfolio{% else %}🚀 Generate Portfolio{% endif %}
+                        </button>
+                    </form>
+
+                    <div id="upload-progress" class="progress-container hidden" style="margin-top: 16px;">
+                        <div class="progress-bar">
+                            <div class="progress-fill"></div>
+                        </div>
+                        <span class="progress-text" style="display: block; margin-top: 8px; text-align: center;">AI is
+                            processing your resume...</span>
+                    </div>
+                </div>
+
+            </div> <!-- END LEFT COLUMN -->
+
+            <!-- RIGHT COLUMN (40%) -->
+            <div class="dash-column right-column">
+
+                <!-- Portfolio Status Card -->
+                <div class="saas-glass-card stagger-in" style="--stagger-idx: 6; border-top: 2px solid var(--primary);">
+                    <div class="saas-card-header">
+                        <h3>Portfolio Status</h3>
+                    </div>
+
+                    {% if portfolio %}
+                    <div class="portfolio-live">
+                        <h2>
+                            <span class="pulse-circle"></span>
+                            Live & Accessible
+                        </h2>
+                        <a href="/p/{{ portfolio.slug }}" class="portfolio-url" target="_blank">portfoli-ai.app/p/{{
+                            portfolio.slug }}</a>
+                    </div>
+
+                    <div style="display: flex; gap: 12px; margin-top: 24px;">
+                        <a href="/p/{{ portfolio.slug }}" class="btn-saas btn-saas-primary" style="flex: 1;"
+                            target="_blank">View Live</a>
+                        <button class="btn-saas btn-saas-danger" onclick="deletePortfolio()">Delete</button>
+                    </div>
+                    <div class="export-buttons-container"
+                        style="display: flex; gap: 12px; margin-top: 12px; align-items: center; justify-content: center; flex-wrap: wrap;">
+                        <button onclick="exportPortfolioPPT('{{ portfolio.slug }}', this)"
+                            class="btn-saas btn-export-pro btn-export-gradient-1"
+                            style="flex: 1; min-width: 250px; text-align: center;">Generate
+                            Portfolio Presentation</button>
+                        <button onclick="exportAtsResume('{{ portfolio.slug }}', 'btn-export-docx-dash')"
+                            class="btn-saas btn-export-pro btn-export-gradient-2" id="btn-export-docx-dash"
+                            style="flex: 1; min-width: 250px;">Generate ATS-Optimized Resume</button>
+                    </div>
+                    {% else %}
+                    <div class="portfolio-live"
+                        style="background: rgba(239, 68, 68, 0.05); border-color: rgba(239, 68, 68, 0.2);">
+                        <h2><span class="pulse-circle"
+                                style="background: #ef4444; box-shadow: none; animation: none;"></span> Not Published
+                        </h2>
+                        <p class="saas-card-desc" style="margin-top: 12px;">Upload your resume to get started.</p>
+                    </div>
+                    {% endif %}
+                </div>
+
+                <!-- API Key Card -->
+                <div class="saas-glass-card stagger-in" style="--stagger-idx: 7;">
+                    <div class="saas-card-header"
+                        style="display: flex; justify-content: space-between; align-items: center;">
+                        <div>
+                            <h3>OpenRouter API Key</h3>
+                            <p class="saas-card-desc">Powers AI generation and chat.</p>
+                        </div>
+                        {% if user.openrouter_api_key %}
+                        <span class="status-badge active">● Active</span>
+                        {% else %}
+                        <span class="status-badge inactive">● Setup Req.</span>
+                        {% endif %}
+                    </div>
+
+                    <div class="api-key-wrapper">
+                        <input type="password" id="api-key-input" class="saas-input" placeholder="sk-or-v1-..."
+                            value="{{ user.openrouter_api_key or '' }}">
+                    </div>
+
+                    <button class="btn-saas btn-saas-outline btn-saas-full" onclick="saveApiKey()">Save API Key</button>
+
+                    <p class="saas-card-desc" style="margin-top: 16px; text-align: center; font-size: 0.8rem;">
+                        Get your free key at <a href="https://openrouter.ai/keys" target="_blank" rel="noopener"
+                            style="color: var(--primary);">openrouter.ai</a>
+                    </p>
+                </div>
+
+            </div> <!-- END RIGHT COLUMN -->
+
+        </div> <!-- End Grid -->
+    </div>
+</section>
+
+<script>
+    // UX improvement for file upload text
+    function updateUploadText(input) {
+        const display = document.getElementById('file-name-display');
+        if (input.files && input.files[0]) {
+            display.textContent = 'Selected: ' + input.files[0].name;
+            display.style.display = 'block';
+        } else {
+            display.style.display = 'none';
+        }
+    }
+</script>
+{% endblock %}
+
+{% block scripts %}
+<script src="/static/js/dashboard.js"></script>
+{% endblock %}

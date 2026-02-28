@@ -1,0 +1,401 @@
+{% extends "base.html" %}
+{% block title %}CareerNova-AI - AI-Powered Portfolio Generator{% endblock %}
+
+{% block content %}
+<section class="hero">
+    <div class="hero-bg">
+        <div class="neural-particles">
+            <div class="particle p-1"></div>
+            <div class="particle p-2"></div>
+            <div class="particle p-3"></div>
+            <div class="particle p-4"></div>
+            <div class="particle p-5"></div>
+            <div class="particle p-6"></div>
+        </div>
+    </div>
+    <div class="hero-content">
+        <div class="hero-card glass-card">
+            <div style="margin-bottom: 20px;">
+                <span class="ai-badge" style="display:inline-block; font-size: 0.8rem; padding: 6px 14px;">✨ AI Powered
+                    Portfolio</span>
+            </div>
+            <h1 class="hero-title" data-animate>
+                Your Resume.<br>
+                Reimagined as an <span class="accent">Intelligent Digital Presence.</span>
+            </h1>
+            <p class="hero-subtitle" data-animate>
+                Upload your resume and let advanced LLMs instantly generate a stunning, interactive portfolio website
+                featuring an autonomous agent that answers questions on your behalf.
+            </p>
+            <div class="hero-actions" data-animate>
+                {% if user %}
+                <a href="/dashboard" class="btn btn-primary btn-lg">Go to Dashboard</a>
+                {% if user.username %}
+                <a href="/p/{{ user.username }}" class="btn btn-outline btn-lg">View Portfolio</a>
+                {% endif %}
+                {% else %}
+                <a href="/signup" class="btn btn-primary btn-lg">Get Started Free</a>
+                <a href="/login" class="btn btn-outline btn-lg">Login</a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="features">
+    <div class="container">
+        <h2 class="section-title" data-animate>How It Works</h2>
+        <p class="section-subtitle" data-animate>Our AI-powered platform transforms your professional experience into an
+            interactive portfolio in minutes</p>
+        <div class="feature-grid">
+            <div class="feature-card glass" data-animate>
+                <div class="feature-icon">📄</div>
+                <h3>Upload Resume</h3>
+                <p>Upload your PDF resume and our AI extracts all the key information automatically.</p>
+            </div>
+            <div class="feature-card glass" data-animate>
+                <div class="feature-icon">🤖</div>
+                <h3>AI Generates Portfolio</h3>
+                <p>Advanced LLMs structure your data into a professional portfolio with bio, skills, projects, and more.
+                </p>
+            </div>
+            <div class="feature-card glass" data-animate>
+                <div class="feature-icon">💬</div>
+                <h3>Chat Agent Activated</h3>
+                <p>A RAG-powered AI agent answers visitor questions using only your resume context.</p>
+            </div>
+            <div class="feature-card glass" data-animate>
+                <div class="feature-icon">🔗</div>
+                <h3>Share Your URL</h3>
+                <p>Get a unique hosted link like <code>/p/yourname</code> to share with recruiters and teams.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Why Choose Section (New) -->
+<section class="why-choose section-pad">
+    <div class="container">
+        <h2 class="section-title" data-animate>Why Choose Our <span class="text-green text-gradient-purple">Resume
+                Converter</span></h2>
+        <p class="section-subtitle" data-animate>Transform your resume into a powerful personal website that showcases
+            your professional experience and skills</p>
+
+        <div class="why-choose-grid">
+            <div class="feature-card-alt" data-animate>
+                <div class="feature-icon-alt">⏱️</div>
+                <h3>Instant Conversion</h3>
+                <p>Turn your resume PDF into a professional website in under 2 minutes.</p>
+            </div>
+            <div class="feature-card-alt" data-animate>
+                <div class="feature-icon-alt">✨</div>
+                <h3>AI-Powered Design</h3>
+                <p>Our AI automatically creates a beautiful, personalized design based on your resume data.</p>
+            </div>
+            <div class="feature-card-alt" data-animate>
+                <div class="feature-icon-alt">🎨</div>
+                <h3>Professional Polish</h3>
+                <p>Get a stunning website that looks like it was designed by a professional.</p>
+            </div>
+            <div class="feature-card-alt" data-animate>
+                <div class="feature-icon-alt">🌐</div>
+                <h3>Share Anywhere</h3>
+                <p>Get your own custom URL that you can share on social media, business cards, and more.</p>
+            </div>
+            <div class="feature-card-alt" data-animate>
+                <div class="feature-icon-alt">📱</div>
+                <h3>Mobile Optimized</h3>
+                <p>Your website looks perfect on all devices - desktop, tablet, and mobile.</p>
+            </div>
+            <div class="feature-card-alt" data-animate>
+                <div class="feature-icon-alt">📊</div>
+                <h3>Stand Out</h3>
+                <p>Differentiate yourself from other professionals with a unique personal brand.</p>
+            </div>
+        </div>
+        <div style="text-align: center; margin-top: 40px;" data-animate>
+            <span class="ai-badge"
+                style="background: rgba(16, 185, 129, 0.1); color: #10b981; border: 1px solid rgba(16, 185, 129, 0.3);">✨
+                100% Free • No Sign-up Required • Instant Results</span>
+        </div>
+    </div>
+</section>
+
+<!-- ATS Score Section (New) -->
+<section class="ats-section section-pad">
+    <div class="container">
+        <div class="ats-grid">
+            <div class="ats-content" data-animate>
+                <span class="ai-badge">✨ AI-Powered Resume Builder</span>
+                <h2 style="font-size: 2.5rem; margin-top: 20px; font-weight: 700;">Get Your ATS Score 80+ With Our Smart
+                    Resume Builder</h2>
+                <p style="font-size: 1.1rem; color: var(--text-muted); margin-top: 20px;">Our AI analyzes your resume
+                    against ResumeWorded and other top ATS standards. Get instant feedback and automatic improvements
+                    that land interviews.</p>
+
+                <ul>
+                    <li>
+                        <i>✓</i>
+                        <div>
+                            <strong>ATS Optimization</strong>
+                            <p style="color: var(--text-muted); font-size: 0.95rem; margin-top: 5px;">Auto-format for
+                                95% of job application systems</p>
+                        </div>
+                    </li>
+                    <li>
+                        <i>✓</i>
+                        <div>
+                            <strong>Score 80+ on ResumeWorded</strong>
+                            <p style="color: var(--text-muted); font-size: 0.95rem; margin-top: 5px;">Get detailed
+                                feedback and suggestions for improvement</p>
+                        </div>
+                    </li>
+                    <li>
+                        <i>✓</i>
+                        <div>
+                            <strong>Industry Templates</strong>
+                            <p style="color: var(--text-muted); font-size: 0.95rem; margin-top: 5px;">Proven designs for
+                                tech, finance, healthcare & more</p>
+                        </div>
+                    </li>
+                </ul>
+                <a href="/dashboard" class="btn btn-primary btn-lg" style="margin-top: 20px;">Get My Resume Tailored
+                    &rarr;</a>
+            </div>
+            <div class="ats-visual" data-animate>
+                <!-- Using a placeholder pattern as image is not available -->
+                <div
+                    style="background: var(--bg-card); padding: 40px; border-radius: var(--radius-lg); height: 100%; min-height: 400px; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden;">
+                    <div
+                        style="position: absolute; top:0; left:0; width: 100%; height: 100%; background: var(--accent-gradient); opacity: 0.1;">
+                    </div>
+                    <div class="glass-card"
+                        style="width: 80%; padding: 20px; position: absolute; left: -10%; transform: rotate(-5deg); box-shadow: var(--shadow-xl); opacity: 0.8;">
+                        <div
+                            style="height: 10px; background: var(--glass-border); width: 40%; margin-bottom: 10px; border-radius: 4px;">
+                        </div>
+                        <div
+                            style="height: 8px; background: var(--glass-border); width: 100%; margin-bottom: 8px; border-radius: 4px;">
+                        </div>
+                        <div
+                            style="height: 8px; background: var(--glass-border); width: 90%; margin-bottom: 8px; border-radius: 4px;">
+                        </div>
+                        <div
+                            style="height: 8px; background: var(--glass-border); width: 95%; margin-bottom: 20px; border-radius: 4px;">
+                        </div>
+                        <div style="color: #ef4444; font-weight: bold; text-align: right; font-size: 1.5rem;">42%</div>
+                    </div>
+                    <div class="glass-card"
+                        style="width: 80%; padding: 20px; z-index: 10; box-shadow: var(--shadow-xl); border: 2px solid #10b981;">
+                        <div
+                            style="display:flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                            <div style="height: 12px; background: #10b981; width: 50%; border-radius: 4px;"></div>
+                            <span class="ai-badge"
+                                style="background: rgba(16, 185, 129, 0.1); color: #10b981; border: 1px solid rgba(16, 185, 129, 0.3);">ATS
+                                Optimized</span>
+                        </div>
+                        <div
+                            style="height: 8px; background: var(--text); opacity: 0.7; width: 100%; margin-bottom: 8px; border-radius: 4px;">
+                        </div>
+                        <div
+                            style="height: 8px; background: var(--text); opacity: 0.7; width: 100%; margin-bottom: 8px; border-radius: 4px;">
+                        </div>
+                        <div
+                            style="height: 8px; background: var(--text); opacity: 0.7; width: 80%; margin-bottom: 20px; border-radius: 4px;">
+                        </div>
+                        <div style="color: #10b981; font-weight: bold; text-align: right; font-size: 2rem;">89%+</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Testimonials Section (New) -->
+<section class="testimonials section-pad">
+    <div class="container">
+        <div style="text-align: center; margin-bottom: 20px;" data-animate>
+            <span class="ai-badge">99 Success Stories</span>
+        </div>
+        <h2 class="section-title" data-animate>Join 1350+ professionals who enhanced their <br><span
+                class="text-gradient-purple"
+                style="background: linear-gradient(135deg, #6366f1, #10b981); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">personal
+                branding</span></h2>
+        <p class="section-subtitle" data-animate>From students to senior professionals, see how CareerNova helped them
+            stand out and get hired at top companies.</p>
+
+        <div class="testimonials-grid">
+            <div class="testimonial-card" data-animate>
+                <div class="stars">★★★★★</div>
+                <p class="testimonial-text">"CareerNova transformed my basic resume into a stunning portfolio. The AI
+                    agent feature helped me get an edge over the competition!"</p>
+                <div class="testimonial-author">
+                    <div class="author-avatar">SC</div>
+                    <div>
+                        <strong>Sarah Chen</strong>
+                        <div style="font-size: 0.85rem; color: var(--text-muted);">Software Engineer</div>
+                    </div>
+                </div>
+                <div class="company-badge">Google</div>
+            </div>
+            <div class="testimonial-card" data-animate>
+                <div class="stars">★★★★★</div>
+                <p class="testimonial-text">"The ATS optimization is incredible. My resume went from a 42 to 89 score.
+                    Landed my dream job at Airbnb!"</p>
+                <div class="testimonial-author">
+                    <div class="author-avatar" style="background: linear-gradient(135deg, #f59e0b, #ef4444);">MR</div>
+                    <div>
+                        <strong>Marcus Rodriguez</strong>
+                        <div style="font-size: 0.85rem; color: var(--text-muted);">UX Designer</div>
+                    </div>
+                </div>
+                <div class="company-badge"
+                    style="color: #ef4444; background: rgba(239, 68, 68, 0.1); border-color: rgba(239, 68, 68, 0.2);">
+                    Airbnb</div>
+            </div>
+            <div class="testimonial-card" data-animate>
+                <div class="stars">★★★★★</div>
+                <p class="testimonial-text">"As a recent graduate, I needed to stand out. The 1-minute setup promise is
+                    real. Had my portfolio live on the same day I signed up."</p>
+                <div class="testimonial-author">
+                    <div class="author-avatar" style="background: linear-gradient(135deg, #10b981, #3b82f6);">EF</div>
+                    <div>
+                        <strong>Emily Foster</strong>
+                        <div style="font-size: 0.85rem; color: var(--text-muted);">Product Manager</div>
+                    </div>
+                </div>
+                <div class="company-badge"
+                    style="color: #10b981; background: rgba(16, 185, 129, 0.1); border-color: rgba(16, 185, 129, 0.2);">
+                    Spotify</div>
+            </div>
+            <div class="testimonial-card" data-animate>
+                <div class="stars">★★★★★</div>
+                <p class="testimonial-text">"The conversational AI agent that answers questions about my experience is
+                    mind-blowing. Recruiters love interacting with it."</p>
+                <div class="testimonial-author">
+                    <div class="author-avatar" style="background: linear-gradient(135deg, #8b5cf6, #ec4899);">DK</div>
+                    <div>
+                        <strong>David Kim</strong>
+                        <div style="font-size: 0.85rem; color: var(--text-muted);">Data Scientist</div>
+                    </div>
+                </div>
+                <div class="company-badge"
+                    style="color: #8b5cf6; background: rgba(139, 92, 246, 0.1); border-color: rgba(139, 92, 246, 0.2);">
+                    Tesla</div>
+            </div>
+            <div class="testimonial-card" data-animate>
+                <div class="stars">★★★★★</div>
+                <p class="testimonial-text">"Switching from a boring PDF resume to CareerNova was a game-changer.
+                    Recruiters started reaching out within days!"</p>
+                <div class="testimonial-author">
+                    <div class="author-avatar" style="background: linear-gradient(135deg, #3b82f6, #6366f1);">JL</div>
+                    <div>
+                        <strong>Jessica Liu</strong>
+                        <div style="font-size: 0.85rem; color: var(--text-muted);">Frontend Dev</div>
+                    </div>
+                </div>
+                <div class="company-badge"
+                    style="color: #3b82f6; background: rgba(59, 130, 246, 0.1); border-color: rgba(59, 130, 246, 0.2);">
+                    Meta</div>
+            </div>
+            <div class="testimonial-card" data-animate>
+                <div class="stars">★★★★★</div>
+                <p class="testimonial-text">"I love how I can easily export my portfolio into a stunning presentation
+                    format. It makes final round interviews a breeze."</p>
+                <div class="testimonial-author">
+                    <div class="author-avatar" style="background: linear-gradient(135deg, #ef4444, #f97316);">AJ</div>
+                    <div>
+                        <strong>Alex Johnson</strong>
+                        <div style="font-size: 0.85rem; color: var(--text-muted);">Full Stack</div>
+                    </div>
+                </div>
+                <div class="company-badge"
+                    style="color: #f97316; background: rgba(249, 115, 22, 0.1); border-color: rgba(249, 115, 22, 0.2);">
+                    Netflix</div>
+            </div>
+        </div>
+        <div style="text-align: center; margin-top: 40px; color: #fbbf24; font-weight: bold;" data-animate>
+            ★ 4.9/5 Based on 1000+ Reviews
+        </div>
+    </div>
+</section>
+
+
+<!-- Pricing Section (New) -->
+<section class="pricing section-pad" id="pricing">
+    <div class="container">
+        <div class="pricing-header" data-animate>
+            <h2 class="section-title">Launch free. Go Pro for more.</h2>
+            <p class="section-subtitle">Early access pricing. Limited time.</p>
+            <div class="pricing-toggle">
+                <button class="active">Monthly</button>
+                <button>Yearly</button>
+            </div>
+        </div>
+
+        <div class="pricing-grid">
+            <div class="pricing-card" data-animate>
+                <div class="ai-badge" style="display:inline-block; margin-bottom: 20px;">Starter Plan</div>
+                <p style="color: var(--text-muted); min-height: 48px;">Ship fast. Showcase yourself to the world.</p>
+                <div class="price-display" data-monthly="$0<span>/month</span>" data-yearly="$0<span>/year</span>">
+                    $0<span>/month</span></div>
+                <ul class="pricing-features">
+                    <li><span style="color: #10b981;">✓</span> 1 Portfolio generation</li>
+                    <li><span style="color: #10b981;">✓</span> Standard themes</li>
+                    <li><span style="color: #10b981;">✓</span> ATS Resume export</li>
+                    <li><span style="color: #10b981;">✓</span> 50 AI Chat queries/mo</li>
+                    <li><span style="color: var(--text-muted);">—</span> Custom domain</li>
+                </ul>
+                <a href="/signup" class="btn btn-outline"
+                    style="width: 100%; justify-content: center; margin-top: 20px;">Get Started Free</a>
+            </div>
+
+            <div class="pricing-card pro" data-animate>
+                <div class="popular-badge">Most Popular</div>
+                <div class="ai-badge"
+                    style="display:inline-block; margin-bottom: 20px; background: rgba(99, 102, 241, 0.2); color: #818cf8; border-color: rgba(99, 102, 241, 0.4);">
+                    Pro Plan ✨</div>
+                <p style="color: var(--text-muted); min-height: 48px;">Custom domain. Advanced AI. No CareerNova
+                    branding.</p>
+                <div class="price-display" data-monthly="$99<span>/month</span>" data-yearly="$120<span>/year</span>">
+                    $99<span>/month</span></div>
+                <ul class="pricing-features">
+                    <li><span style="color: #10b981;">✓</span> Unlimited Portfolios</li>
+                    <li><span style="color: #10b981;">✓</span> Premium themes & PPT Export</li>
+                    <li><span style="color: #10b981;">✓</span> Advanced ATS optimization</li>
+                    <li><span style="color: #10b981;">✓</span> Unlimited AI Chat queries</li>
+                    <li><span style="color: #10b981;">✓</span> Custom domain support</li>
+                </ul>
+                <a href="/signup" class="btn btn-primary"
+                    style="width: 100%; justify-content: center; margin-top: 20px;">Upgrade to Pro</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const toggleBtns = document.querySelectorAll('.pricing-toggle button');
+        const priceDisplays = document.querySelectorAll('.price-display');
+
+        toggleBtns.forEach((btn, index) => {
+            btn.addEventListener('click', () => {
+                // Remove active class from all
+                toggleBtns.forEach(b => b.classList.remove('active'));
+                // Add active class to clicked
+                btn.classList.add('active');
+
+                // Update prices
+                const isYearly = index === 1; // Assuming 0 is Monthly, 1 is Yearly
+                priceDisplays.forEach(display => {
+                    const monthlyText = display.getAttribute('data-monthly');
+                    const yearlyText = display.getAttribute('data-yearly');
+                    display.innerHTML = isYearly ? yearlyText : monthlyText;
+                });
+            });
+        });
+    });
+</script>
+{% endblock %}

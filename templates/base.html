@@ -1,0 +1,194 @@
+<html lang="en" data-theme="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="AI-Powered Portfolio Generator - Transform your resume into a stunning living portfolio with intelligent chat agents.">
+    <title>{% block title %}CareerNova-AI - AI Portfolio Generator{% endblock %}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/style.css?v=9">
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧠</text></svg>">
+    {% block head %}{% endblock %}
+</head>
+
+<body class="dashboard-body">
+    {% block loader_section %}
+    <!-- Full Screen Video Loader -->
+    <div id="video-loader" class="video-loader" data-loader-time="{% block loader_time %}2500{% endblock %}">
+        <video autoplay muted playsinline class="loader-video">
+            <source src="{% block loader_video %}/static/animations/16-9.mp4{% endblock %}" type="video/mp4">
+        </video>
+        <div class="loader-overlay"></div>
+        <p class="video-loader-text">{% block loader_text %}Initializing Your AI Experience...{% endblock %}</p>
+    </div>
+    {% endblock %}
+
+    <!-- Advanced Floating Orbs Background -->
+    <div class="dashboard-orbs">
+        <div class="dash-orb dash-orb-1"></div>
+        <div class="dash-orb dash-orb-2"></div>
+        <div class="dash-orb dash-orb-3"></div>
+    </div>
+    <!-- Navigation -->
+    <nav class="navbar saas-nav">
+        <div class="nav-container"
+            style="max-width: 1400px; display: flex; justify-content: space-between; align-items: center;">
+            <div class="nav-brand-wrapper">
+                <a href="/" class="nav-brand careernova-brand">
+                    <img src="/static/images/careernova_logo.png" alt="CareerNova-AI Logo" class="careernova-logo">
+                    <span class="careernova-text">CareerNova<span class="accent">-AI</span></span>
+                </a>
+            </div>
+
+            <div class="nav-links center-links" style="display: flex; align-items: center; gap: 25px;">
+                <a href="/" class="nav-link nav-link-custom">Home</a>
+                <a href="/dashboard" class="nav-link nav-link-custom"
+                    style="display: flex; align-items: center; gap: 8px;">
+                    AI Portfolio Builder <span class="nav-badge-new">NEW</span>
+                </a>
+                <div class="nav-dropdown">
+                    <a href="#" class="nav-link nav-link-custom"
+                        style="display: flex; align-items: center; gap: 4px;">Products
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-top: 2px;">
+                            <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                    </a>
+                </div>
+                <a href="/about" class="nav-link nav-link-custom">About</a>
+                <a href="/contact" class="nav-link nav-link-custom">Contact Us</a>
+                <a href="/#pricing" class="nav-link nav-link-custom">Pricing</a>
+            </div>
+
+            <div class="nav-actions" style="display: flex; gap: 15px; align-items: center;">
+                <!-- Theme Toggle -->
+                <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">
+                    <span class="theme-icon light-icon">☀️</span>
+                    <span class="theme-icon dark-icon">🌙</span>
+                </button>
+
+                {% if user %}
+                <div class="avatar-dropdown">
+                    <div class="avatar-btn" title="{{ user.username }}">
+                        {{ user.username[0] | upper }}
+                    </div>
+                </div>
+                <a href="/dashboard" class="btn btn-dark-outline nav-btn">Dashboard</a>
+                <button onclick="logout()" class="btn btn-white-pill nav-btn">Logout</button>
+                {% else %}
+                <a href="/login" class="btn btn-dark-outline nav-btn">Login</a>
+                <a href="/signup" class="btn btn-white-pill nav-btn">Try for Free</a>
+                {% endif %}
+            </div>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- Comprehensive Footer -->
+    <footer class="footer-comprehensive">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col" style="padding-right: 40px;">
+                    <a href="/" class="nav-brand careernova-brand" style="margin-bottom: 20px; display: inline-flex;">
+                        <img src="/static/images/careernova_logo.png" alt="CareerNova-AI Logo" class="careernova-logo"
+                            style="width: 35px; height: 35px;">
+                        <span class="careernova-text" style="font-size: 1.2rem;">CareerNova<span
+                                class="accent">-AI</span></span>
+                    </a>
+                    <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 25px;">Convert your resume
+                        into an ATS-friendly, beautiful professional portfolio in minutes. Pick a template, customize,
+                        and share a link that gets you noticed.</p>
+                    <div
+                        style="display: flex; align-items: center; gap: 10px; color: var(--text-muted); font-size: 0.95rem;">
+                        <span>✉️</span> support@careernova-ai.com
+                    </div>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Product</h4>
+                    <ul>
+                        <li><a href="/dashboard">Portfolio Builder</a></li>
+                        <li><a href="/dashboard">ATS Resume</a></li>
+                        <li><a href="#">Templates</a></li>
+                        <li><a href="#">Pricing</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="/about">About</a></li>
+                        <li><a href="#">Success Stories</a></li>
+                        <li><a href="/contact">Contact</a></li>
+                        <li><a href="#">Support</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Legal</h4>
+                    <ul>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Cookie Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <div>&copy; 2026 CareerNova-AI. All rights reserved.</div>
+                <div class="social-links">
+                    <a href="#" class="social-icon" aria-label="Twitter">𝕏</a>
+                    <a href="#" class="social-icon" aria-label="LinkedIn">in</a>
+                    <a href="#" class="social-icon" aria-label="GitHub">gh</a>
+                </div>
+                <div style="font-size: 0.85rem;">
+                    Built with <span style="color: #ef4444;">♥</span> by <span class="accent">Sauradip Dinda</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Video Loader Logic -->
+    <script>
+        // Track when the loader started
+        const loaderStartTime = Date.now();
+
+        window.addEventListener("load", () => {
+            const loader = document.getElementById('video-loader');
+            const video = loader ? loader.querySelector('video') : null;
+            if (loader) {
+                // Dynamic loading duration passed from Jinja directly via data attribute
+                const minLoaderTime = parseInt(loader.getAttribute('data-loader-time')) || 2500;
+
+                // Ensure the video animation visually appears, but keep it snappy
+                const elapsed = Date.now() - loaderStartTime;
+                const remainingTime = Math.max(0, minLoaderTime - elapsed);
+
+                setTimeout(() => {
+                    // Trigger the snappier 0.8s CSS transition
+                    loader.style.opacity = '0';
+
+                    // Wait exactly 800ms for the smooth fade transition to complete
+                    setTimeout(() => {
+                        loader.style.display = 'none';
+                        if (video) video.pause(); // Stop playing when hidden
+                    }, 800);
+                }, remainingTime);
+            }
+        });
+    </script>
+
+    <script src="/static/js/app.js"></script>
+    {% block scripts %}{% endblock %}
+</body>
+
+</html>
