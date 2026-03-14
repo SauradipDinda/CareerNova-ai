@@ -283,22 +283,14 @@ async def upload_resume(
         logger.error("Resume processing failed for user %s: %s", user.username, str(e))
         logger.error("Full traceback:", exc_info=True)
         
-        # Create fallback portfolio data
-        logger.info("Creating fallback portfolio for user: %s", user.username)
-        data = {
-            "name": user.username.title(),
-            "role": "Professional",
-            "tagline": "Building the future with AI",
-            "bio": "This portfolio was generated from your resume. Please update with your specific details.",
-            "skills": ["Python", "JavaScript", "AI", "Web Development"],
-            "projects": [],
-            "experience": [],
-            "education": [],
-            "achievements": [],
-            "contact": {},
-            "_raw_text": "Fallback portfolio created due to processing error"
-        }
-        logger.info("Fallback portfolio created successfully")
+        # Clean up uploaded file before raising exception
+        if os.path.exists(filepath):
+            os.remove(filepath)
+            
+        raise HTTPException(
+            status_code=400, 
+            detail="Could not extract details from the resume. Please ensure it is a text-based PDF or try again later. If the issue persists, your API key may be exhausted."
+        )
     finally:
         # Clean up uploaded file
         if os.path.exists(filepath):
